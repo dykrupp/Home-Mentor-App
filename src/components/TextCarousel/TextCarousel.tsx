@@ -1,12 +1,10 @@
-import { Typography } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 import { FC } from 'react';
 import styled from 'styled-components';
-
-interface TextCarouselProps {
-    index: number;
-}
+import iconArrow from '../../assets/buttons/icon-arrow.svg';
 
 export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
+    const classes = useStyles();
     return (
         <Container>
             <Typography variant="h4">
@@ -14,12 +12,7 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
                 {index === 1 && 'We are available all across the globe'}
                 {index === 2 && 'Manufactured with the best materials'}
             </Typography>
-            <Typography
-                variant="body1"
-                style={{
-                    margin: '15px 0px 15px 0px',
-                }}
-            >
+            <Typography variant="body1">
                 {index === 0 &&
                     `We provide unmatched quality, comfort, and style for property
                 owners across the country. Our experts combine form and function
@@ -31,15 +24,35 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
                     for your home or place of business. Locally, we’re in most major cities 
                     throughout the country. Find the branch nearest you using our store locator. 
                     Any questions? Don't hesitate to contact us today. `}
-                {index === 2 && `Our modern furniture store provide a high level of quality. Our company 
+                {index === 2 &&
+                    `Our modern furniture store provide a high level of quality. Our company 
                 has invested in advanced technology to ensure that every product is 
                 made as perfect and as consistent as possible. With three decades of 
                 experience in this industry, we understand what customers 
                 want for their home and office. `}
             </Typography>
+            <Button
+                classes={{ label: classes.buttonLabel }}
+                variant="contained"
+                color="primary"
+                endIcon={<img alt="arrow" src={iconArrow} />}
+            >
+                SHOP NOW
+            </Button>
         </Container>
     );
 };
+
+const useStyles = makeStyles({
+    buttonLabel: {
+        letterSpacing: '3px',
+        justifyContent: 'flex-start',
+    },
+});
+
+interface TextCarouselProps {
+    index: number;
+}
 
 const Container = styled.div`
     width: 465px;
