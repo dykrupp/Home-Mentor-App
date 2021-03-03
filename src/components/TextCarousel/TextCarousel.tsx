@@ -7,11 +7,23 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
     const classes = useStyles();
     return (
         <Container>
-            <Typography variant="h4">
-                {index === 0 && 'Discover innovative ways to decorate'}
-                {index === 1 && 'We are available all across the globe'}
-                {index === 2 && 'Manufactured with the best materials'}
-            </Typography>
+            {index === 0 && (
+                <Typography variant="h4">
+                    Discover innovative ways to decorate
+                </Typography>
+            )}
+            {index === 1 && (
+                <>
+                    <Typography variant="h4">We are available</Typography>
+                    <Typography variant="h4">all across the globe</Typography>
+                </>
+            )}
+            {index === 2 && (
+                <>
+                    <Typography variant="h4">Manufactured with</Typography>
+                    <Typography variant="h4">the best materials </Typography>
+                </>
+            )}
             <Typography variant="body1">
                 {index === 0 &&
                     `We provide unmatched quality, comfort, and style for property
@@ -32,7 +44,6 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
                 want for their home and office. `}
             </Typography>
             <StyledButton
-                style={{ width: '225px' }}
                 classes={{ label: classes.buttonLabel }}
                 endIcon={<img alt="arrow" src={iconArrow} />}
             >
@@ -62,6 +73,8 @@ const Container = styled.div`
 `;
 
 const StyledButton = styled(Button)`
+    width: 225px;
+    padding: 0px !important;
     &:hover {
         opacity: 0.6;
         background-color: transparent !important;

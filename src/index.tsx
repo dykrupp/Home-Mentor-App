@@ -9,6 +9,9 @@ const theme = createMuiTheme({
         primary: {
             main: 'hsl(0, 0%, 0%)',
         },
+        secondary: {
+            main: 'hsl(0, 0%, 100%)',
+        },
     },
     typography: {
         body1: {
@@ -21,6 +24,7 @@ const theme = createMuiTheme({
             color: 'hsl(0, 0%, 0%)',
             fontSize: '40px',
             fontFamily: 'sans-serif',
+            lineHeight: 1,
         },
         h6: {
             fontWeight: 700,

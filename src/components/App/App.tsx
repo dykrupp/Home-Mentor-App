@@ -1,5 +1,5 @@
 import './App.css';
-import { ImageSlider } from '../ImageSlider/ImageSlider';
+import { NavImageSlider } from '../NavImageSlider/NavImageSlider';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { TextCarousel } from '../TextCarousel/TextCarousel';
@@ -13,7 +13,7 @@ const App = () => {
         <div className="App">
             <ColumnGrid>
                 <MainRow>
-                    <ImageSlider index={index} />
+                    <NavImageSlider index={index} />
                     <MainRowColumn>
                         <TextCarousel index={index} />
                         <NavButtonContainer index={index} setIndex={setIndex} />
