@@ -44,4 +44,7 @@ const StyledButton = styled(Button)`
     height: 100%;
     border-radius: 0px !important;
     width: 80px;
+    &:hover {
+        background-color: hsl(0, 0%, 63%) !important;
+    }
 `;

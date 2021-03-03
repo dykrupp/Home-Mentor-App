@@ -31,21 +31,20 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
                 experience in this industry, we understand what customers 
                 want for their home and office. `}
             </Typography>
-            <Button
+            <StyledButton
+                style={{ width: '225px' }}
                 classes={{ label: classes.buttonLabel }}
-                variant="contained"
-                color="primary"
                 endIcon={<img alt="arrow" src={iconArrow} />}
             >
                 SHOP NOW
-            </Button>
+            </StyledButton>
         </Container>
     );
 };
 
 const useStyles = makeStyles({
     buttonLabel: {
-        letterSpacing: '3px',
+        letterSpacing: '8px',
         justifyContent: 'flex-start',
     },
 });
@@ -60,4 +59,11 @@ const Container = styled.div`
     flex-direction: column;
     flex: 1;
     justify-content: center;
+`;
+
+const StyledButton = styled(Button)`
+    &:hover {
+        opacity: 0.6;
+        background-color: transparent !important;
+    }
 `;
