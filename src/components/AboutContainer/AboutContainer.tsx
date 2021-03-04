@@ -1,31 +1,40 @@
-import { Typography } from '@material-ui/core';
+import { Typography, useTheme } from '@material-ui/core';
 import styled from 'styled-components';
 import aboutLightSrc from '../../assets/about/about-light.jpg';
 import aboutDarkSrc from '../../assets/about/about-dark.jpg';
+import { ResponsiveBody1 } from '../ResponsiveBody1/index';
+import { FC } from 'react';
 
-export const AboutContainer = () => (
-    <>
-        <AboutLeftContainer>
-            <MaxImage alt="about dark" src={aboutDarkSrc} />
-        </AboutLeftContainer>
-        <AboutMidContainer>
-            <Header variant="h6">ABOUT OUR FURNITURE</Header>
-            <Typography variant="body1">
-                {`Our multifunctional collection blends design and function to suit your individual taste. 
+interface AboutContainerProps {
+    isMobile: boolean;
+}
+
+export const AboutContainer: FC<AboutContainerProps> = ({ isMobile }) => {
+    const theme = useTheme();
+    return (
+        <>
+            <AboutLeftContainer>
+                <MaxImage alt="about dark" src={aboutDarkSrc} />
+            </AboutLeftContainer>
+            <AboutMidContainer style={{ padding: isMobile ? '25px' : '50px' }}>
+                <Header variant="h6">ABOUT OUR FURNITURE</Header>
+                <ResponsiveBody1 isMobile={isMobile} theme={theme}>
+                    {`Our multifunctional collection blends design and function to suit your individual taste. 
     Make each room unique, or pick a cohesive theme that best express your interests and what 
     inspires you. Find the furniture pieces you need, from traditional to contemporary styles 
     or anything in between. Product specialists are available to help you create your dream space. `}
-            </Typography>
-        </AboutMidContainer>
-        <AboutRightContainer>
-            <MaxImage alt="about light" src={aboutLightSrc} />
-        </AboutRightContainer>
-    </>
-);
+                </ResponsiveBody1>
+            </AboutMidContainer>
+            <AboutRightContainer>
+                <MaxImage alt="about light" src={aboutLightSrc} />
+            </AboutRightContainer>
+        </>
+    );
+};
 
 const AboutLeftContainer = styled.div`
     flex: 1;
-    max-width: 420px;
+    min-width: 420px;
 `;
 
 const Header = styled(Typography)`
@@ -39,12 +48,11 @@ const AboutMidContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 50px;
 `;
 
 const AboutRightContainer = styled.div`
     flex: 1;
-    max-width: 440px;
+    min-width: 440px;
 `;
 
 const MaxImage = styled.img`

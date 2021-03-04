@@ -7,14 +7,16 @@ import rightArrow from '../../assets/buttons/icon-angle-right.svg';
 interface NavButtonContainerProps {
     index: number;
     setIndex: React.Dispatch<React.SetStateAction<number>>;
+    wrapperStyle?: React.CSSProperties | undefined;
 }
 
 export const NavButtonContainer: FC<NavButtonContainerProps> = ({
     index,
     setIndex,
+    wrapperStyle,
 }) => {
     return (
-        <ButtonWrapper>
+        <ButtonWrapper style={wrapperStyle}>
             <StyledButton
                 disabled={index === 0}
                 onClick={() => setIndex(index - 1)}
@@ -42,6 +44,7 @@ const ButtonWrapper = styled.div`
 
 const StyledButton = styled(Button)`
     height: 100%;
+    min-height: 80px;
     border-radius: 0px !important;
     width: 80px;
     &:hover {

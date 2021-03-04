@@ -1,30 +1,51 @@
-import { Button, makeStyles, Typography } from '@material-ui/core';
+import { Button, makeStyles, useTheme } from '@material-ui/core';
 import { FC } from 'react';
 import styled from 'styled-components';
 import iconArrow from '../../assets/buttons/icon-arrow.svg';
+import { ResponsiveH4 } from '../ResponsiveH4';
+import { ResponsiveBody1 } from '../ResponsiveBody1';
 
-export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
+export const TextCarousel: FC<TextCarouselProps> = ({ index, isMobile }) => {
     const classes = useStyles();
+    const theme = useTheme();
+
     return (
-        <Container>
+        <Container
+            style={{
+                padding: isMobile ? '50px' : '100px',
+            }}
+        >
             {index === 0 && (
-                <Typography variant="h4">
-                    Discover innovative ways to decorate
-                </Typography>
+                <>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        Discover innovative
+                    </ResponsiveH4>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        ways to decorate
+                    </ResponsiveH4>
+                </>
             )}
             {index === 1 && (
                 <>
-                    <Typography variant="h4">We are available</Typography>
-                    <Typography variant="h4">all across the globe</Typography>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        We are available
+                    </ResponsiveH4>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        all across the globe
+                    </ResponsiveH4>
                 </>
             )}
             {index === 2 && (
                 <>
-                    <Typography variant="h4">Manufactured with</Typography>
-                    <Typography variant="h4">the best materials </Typography>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        Manufactured with
+                    </ResponsiveH4>
+                    <ResponsiveH4 theme={theme} isMobile={isMobile}>
+                        the best materials
+                    </ResponsiveH4>
                 </>
             )}
-            <Typography variant="body1">
+            <ResponsiveBody1 theme={theme} isMobile={isMobile}>
                 {index === 0 &&
                     `We provide unmatched quality, comfort, and style for property
                 owners across the country. Our experts combine form and function
@@ -42,7 +63,7 @@ export const TextCarousel: FC<TextCarouselProps> = ({ index }) => {
                 made as perfect and as consistent as possible. With three decades of 
                 experience in this industry, we understand what customers 
                 want for their home and office. `}
-            </Typography>
+            </ResponsiveBody1>
             <StyledButton
                 classes={{ label: classes.buttonLabel }}
                 endIcon={<img alt="arrow" src={iconArrow} />}
@@ -62,10 +83,10 @@ const useStyles = makeStyles({
 
 interface TextCarouselProps {
     index: number;
+    isMobile: boolean;
 }
 
 const Container = styled.div`
-    width: 465px;
     display: flex;
     flex-direction: column;
     flex: 1;

@@ -1,26 +1,54 @@
 import './App.css';
-import { NavImageSlider } from '../NavImageSlider/NavImageSlider';
+import { NavImageSlider } from '../NavImageSlider';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { TextCarousel } from '../TextCarousel/TextCarousel';
-import { NavButtonContainer } from '../NavButtonContainer/NavButtonContainer';
+import { TextCarousel } from '../TextCarousel';
+import { NavButtonContainer } from '../NavButtonContainer';
 import { AboutContainer } from '../AboutContainer/AboutContainer';
+import useMobileQuery from '../../mediaQueries/useMobileQuery';
+import useLargeDesktopQuery from '../../mediaQueries/useLgDesktopQuery';
+import { useMediaQuery } from '@material-ui/core';
 
 const App = () => {
     const [index, setIndex] = useState(0);
 
+    const isMobile = useMobileQuery();
+    const isLgDesktop = useLargeDesktopQuery();
+    const aboutColumnQuery = useMediaQuery('(max-width:1250px)');
+    const isMediumScreen = !isMobile && !isLgDesktop;
+
+
     return (
         <div className="App">
             <ColumnGrid>
-                <MainRow>
-                    <NavImageSlider index={index} />
+                <MainRow
+                    style={{
+                        flexDirection:
+                            isMobile || isMediumScreen ? 'column' : 'row',
+                    }}
+                >
+                    <NavImageSlider
+                        index={index}
+                        setIndex={setIndex}
+                        isMediumScreen={isMediumScreen}
+                        isMobile={isMobile}
+                    />
                     <MainRowColumn>
-                        <TextCarousel index={index} />
-                        <NavButtonContainer index={index} setIndex={setIndex} />
+                        <TextCarousel index={index} isMobile={isMobile} />
+                        {isLgDesktop && (
+                            <NavButtonContainer
+                                index={index}
+                                setIndex={setIndex}
+                            />
+                        )}
                     </MainRowColumn>
                 </MainRow>
-                <AboutRow>
-                    <AboutContainer />
+                <AboutRow
+                    style={{
+                        flexDirection: isMobile || aboutColumnQuery ? 'column' : 'row',
+                    }}
+                >
+                    <AboutContainer isMobile={isMobile} />
                 </AboutRow>
             </ColumnGrid>
         </div>
@@ -38,7 +66,6 @@ const ColumnGrid = styled.div`
 const MainRow = styled.div`
     display: flex;
     flex: 1;
-    min-height: 534px;
 `;
 
 const MainRowColumn = styled.div`
