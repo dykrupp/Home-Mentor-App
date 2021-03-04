@@ -14,7 +14,7 @@ code {
 
 html, body, #root, .App {
   height: 100%;
-  overflow-x: auto;
+  overflow-x:hidden;
 }
 
 .MuiTypography {

@@ -1,4 +1,4 @@
-import { Tabs, Tab, IconButton, Drawer, Link } from '@material-ui/core';
+import { IconButton, Drawer, Link } from '@material-ui/core';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import image1 from '../../assets/sliders/slider1.jpg';
@@ -11,6 +11,7 @@ import { NavButtonContainer } from '../NavButtonContainer';
 import hamburgerImg from '../../assets/mobile/hamburger-menu.svg';
 import closeImg from '../../assets/mobile/icon-close.svg';
 import logoImg from '../../assets/logo/logo.svg';
+import { DesktopLink } from './DesktopLink';
 
 interface ImageSliderProps {
     index: number;
@@ -25,7 +26,6 @@ export const NavImageSlider: FC<ImageSliderProps> = ({
     setIndex,
     isMobile,
 }) => {
-    const [tabIndex, setTabIndex] = useState<number | boolean>(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     let imgSrc = isMobile ? mobileImage1 : image1;
@@ -89,32 +89,20 @@ export const NavImageSlider: FC<ImageSliderProps> = ({
             ) : (
                 <>
                     <DesktopLogoOverlay src={logoImg} />
-                    <StyledTabs
-                        value={tabIndex}
-                        textColor="secondary"
-                        indicatorColor="secondary"
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: 39,
+                            left: 165,
+                        }}
                     >
-                        <StyledTab
-                            label="home"
-                            onMouseEnter={() => setTabIndex(0)}
-                            onMouseLeave={() => setTabIndex(false)}
-                        />
-                        <StyledTab
-                            label="shop"
-                            onMouseEnter={() => setTabIndex(1)}
-                            onMouseLeave={() => setTabIndex(false)}
-                        />
-                        <StyledTab
-                            label="about"
-                            onMouseEnter={() => setTabIndex(2)}
-                            onMouseLeave={() => setTabIndex(false)}
-                        />
-                        <StyledTab
-                            label="contact"
-                            onMouseEnter={() => setTabIndex(3)}
-                            onMouseLeave={() => setTabIndex(false)}
-                        />
-                    </StyledTabs>
+                        <DesktopLinkContainer>
+                            <DesktopLink>home</DesktopLink>
+                            <DesktopLink>shop</DesktopLink>
+                            <DesktopLink>about</DesktopLink>
+                            <DesktopLink>contact</DesktopLink>
+                        </DesktopLinkContainer>
+                    </div>
                 </>
             )}
             {(isMobile || isMediumScreen) && (
@@ -170,17 +158,8 @@ const DesktopLogoOverlay = styled.img`
     left: 65px;
 `;
 
-const StyledTabs = styled(Tabs)`
-    position: absolute;
-    top: 26px;
-    left: 165px;
-`;
-
-const StyledTab = styled(Tab)`
-    min-width: 60px !important;
-    color: white !important;
-    text-transform: none !important;
-    font-weight: 700 !important;
+const DesktopLinkContainer = styled.div`
+    display: flex;
 `;
 
 const SizedImg = styled.img`
