@@ -1,14 +1,15 @@
-import { Tabs, Tab, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Tabs, Tab, IconButton, Drawer, Link } from '@material-ui/core';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import image1 from '../../assets/sliders/slider1.jpg';
 import image2 from '../../assets/sliders/slider2.jpg';
 import image3 from '../../assets/sliders/slider3.jpg';
-import mobileImage1 from '../../assets/sliders/mobile-slider1.jpg';
-import mobileImage2 from '../../assets/sliders/mobile-slider2.jpg';
-import mobileImage3 from '../../assets/sliders/mobile-slider3.jpg';
+import mobileImage1 from '../../assets/mobile/mobile-slider1.jpg';
+import mobileImage2 from '../../assets/mobile/mobile-slider2.jpg';
+import mobileImage3 from '../../assets/mobile/mobile-slider3.jpg';
 import { NavButtonContainer } from '../NavButtonContainer';
-import hamburgerImg from '../../assets/hamburger-menu.svg';
+import hamburgerImg from '../../assets/mobile/hamburger-menu.svg';
+import closeImg from '../../assets/mobile/icon-close.svg';
 
 interface ImageSliderProps {
     index: number;
@@ -24,42 +25,65 @@ export const NavImageSlider: FC<ImageSliderProps> = ({
     isMobile,
 }) => {
     const [tabIndex, setTabIndex] = useState<number | boolean>(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleClick = (event: any) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     let imgSrc = isMobile ? mobileImage1 : image1;
     if (index === 1) imgSrc = isMobile ? mobileImage2 : image2;
     else if (index === 2) imgSrc = isMobile ? mobileImage3 : image3;
 
-    const isMenuOpen = Boolean(anchorEl);
+    const handleClick = () => setIsDrawerOpen(true);
+    const handleClose = () => setIsDrawerOpen(false);
 
     return (
         <Container>
             {isMobile ? (
                 <>
-                    <MobileMenuContainer>
+                    <MobileButtonContainer>
                         <IconButton onClick={handleClick}>
                             <img alt="hamburger menu" src={hamburgerImg} />
                         </IconButton>
-                        <Menu
-                            open={isMenuOpen}
-                            onClose={handleClose}
-                            anchorEl={anchorEl}
-                        >
-                            <MenuItem onClick={handleClose}>home</MenuItem>
-                            <MenuItem onClick={handleClose}>shop</MenuItem>
-                            <MenuItem onClick={handleClose}>about</MenuItem>
-                            <MenuItem onClick={handleClose}>contact</MenuItem>
-                        </Menu>
-                    </MobileMenuContainer>
+                    </MobileButtonContainer>
                     <MobileTextOverlay>room</MobileTextOverlay>
+                    <Drawer
+                        anchor={'top'}
+                        open={isDrawerOpen}
+                        onClose={handleClose}
+                    >
+                        <DrawerContent>
+                            <IconButton
+                                onClick={handleClose}
+                                style={{ margin: '15px' }}
+                            >
+                                <img src={closeImg} alt="close" />
+                            </IconButton>
+                            <LinkContainer>
+                                <StyledMobileLink
+                                    href="#"
+                                    onClick={handleClose}
+                                >
+                                    home
+                                </StyledMobileLink>
+                                <StyledMobileLink
+                                    href="#"
+                                    onClick={handleClose}
+                                >
+                                    shop
+                                </StyledMobileLink>
+                                <StyledMobileLink
+                                    href="#"
+                                    onClick={handleClose}
+                                >
+                                    about
+                                </StyledMobileLink>
+                                <StyledMobileLink
+                                    href="#"
+                                    onClick={handleClose}
+                                >
+                                    contact
+                                </StyledMobileLink>
+                            </LinkContainer>
+                        </DrawerContent>
+                    </Drawer>
                 </>
             ) : (
                 <>
@@ -108,7 +132,18 @@ const Container = styled.div`
     position: relative;
 `;
 
-const MobileMenuContainer = styled.div`
+const DrawerContent = styled.div`
+    display: flex;
+    height: 100px;
+`;
+
+const LinkContainer = styled.div`
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+`;
+
+const MobileButtonContainer = styled.div`
     position: absolute;
     top: 25px;
     left: 15px;
@@ -121,6 +156,14 @@ const MobileTextOverlay = styled.p`
     font-weight: 700;
     font-size: 18px;
     color: white;
+`;
+
+const StyledMobileLink = styled(Link)`
+    align-items: center;
+    display: flex;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 700;
 `;
 
 const DesktopTextOverlay = styled.p`
