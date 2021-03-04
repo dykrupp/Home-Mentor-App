@@ -18,7 +18,7 @@ export const MobileOverlay = () => {
                     <img alt="hamburger menu" src={hamburgerImg} />
                 </IconButton>
             </MobileButtonContainer>
-            <MobileLogoOverlay src={logoImg} />
+            <MobileLogoOverlay alt="logo" src={logoImg} />
             <Drawer anchor={'top'} open={isDrawerOpen} onClose={handleClose}>
                 <DrawerContent>
                     <IconButton

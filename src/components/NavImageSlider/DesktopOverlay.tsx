@@ -8,7 +8,7 @@ export const DesktopOverlay = () => {
 
     return (
         <>
-            <DesktopLogoOverlay src={logoImg} />
+            <DesktopLogoOverlay alt="logo" src={logoImg} />
             <DesktopLinkWrapper>
                 <DesktopLinkContainer>
                     <DesktopLinkColumn>
