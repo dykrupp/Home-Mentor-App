@@ -10,6 +10,7 @@ import mobileImage3 from '../../assets/mobile/mobile-slider3.jpg';
 import { NavButtonContainer } from '../NavButtonContainer';
 import hamburgerImg from '../../assets/mobile/hamburger-menu.svg';
 import closeImg from '../../assets/mobile/icon-close.svg';
+import logoImg from '../../assets/logo/logo.svg';
 
 interface ImageSliderProps {
     index: number;
@@ -43,7 +44,7 @@ export const NavImageSlider: FC<ImageSliderProps> = ({
                             <img alt="hamburger menu" src={hamburgerImg} />
                         </IconButton>
                     </MobileButtonContainer>
-                    <MobileTextOverlay>room</MobileTextOverlay>
+                    <MobileLogoOverlay src={logoImg} />
                     <Drawer
                         anchor={'top'}
                         open={isDrawerOpen}
@@ -87,7 +88,7 @@ export const NavImageSlider: FC<ImageSliderProps> = ({
                 </>
             ) : (
                 <>
-                    <DesktopTextOverlay>room</DesktopTextOverlay>
+                    <DesktopLogoOverlay src={logoImg} />
                     <StyledTabs
                         value={tabIndex}
                         textColor="secondary"
@@ -149,13 +150,10 @@ const MobileButtonContainer = styled.div`
     left: 15px;
 `;
 
-const MobileTextOverlay = styled.p`
+const MobileLogoOverlay = styled.img`
     position: absolute;
-    top: 15px;
-    left: 160px;
-    font-weight: 700;
-    font-size: 18px;
-    color: white;
+    top: 37px;
+    left: 155px;
 `;
 
 const StyledMobileLink = styled(Link)`
@@ -166,13 +164,10 @@ const StyledMobileLink = styled(Link)`
     font-weight: 700;
 `;
 
-const DesktopTextOverlay = styled.p`
+const DesktopLogoOverlay = styled.img`
     position: absolute;
-    top: 10px;
-    left: 60px;
-    color: white;
-    font-size: 25px;
-    font-weight: 700;
+    top: 43px;
+    left: 65px;
 `;
 
 const StyledTabs = styled(Tabs)`
