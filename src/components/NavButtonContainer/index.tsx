@@ -18,16 +18,20 @@ export const NavButtonContainer: FC<NavButtonContainerProps> = ({
     return (
         <ButtonWrapper style={wrapperStyle}>
             <StyledButton
-                disabled={index === 0}
-                onClick={() => setIndex(index - 1)}
+                onClick={() => {
+                    if (index === 0) setIndex(2);
+                    else setIndex(index - 1);
+                }}
                 variant="contained"
                 color="primary"
             >
                 <img alt="left arrow" src={leftArrow} />
             </StyledButton>
             <StyledButton
-                disabled={index >= 2}
-                onClick={() => setIndex(index + 1)}
+                onClick={() => {
+                    if (index === 2) setIndex(0);
+                    else setIndex(index + 1);
+                }}
                 variant="contained"
                 color="primary"
             >
