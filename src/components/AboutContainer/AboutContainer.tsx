@@ -2,20 +2,31 @@ import { Typography, useTheme } from '@material-ui/core';
 import styled from 'styled-components';
 import aboutLightSrc from '../../assets/about/about-light.jpg';
 import aboutDarkSrc from '../../assets/about/about-dark.jpg';
+import aboutLightMobile from '../../assets/mobile/image-about-light.jpg';
+import aboutDarkMobile from '../../assets/mobile/image-about-dark.jpg';
 import { ResponsiveBody1 } from '../ResponsiveBody1/index';
 import { FC } from 'react';
 
 interface AboutContainerProps {
     isMobile: boolean;
+    isColumn: boolean;
 }
 
-export const AboutContainer: FC<AboutContainerProps> = ({ isMobile }) => {
+export const AboutContainer: FC<AboutContainerProps> = ({
+    isMobile,
+    isColumn,
+}) => {
     const theme = useTheme();
+    const showMobileImages = isMobile || !isColumn;
+
     return (
         <>
-            <AboutLeftContainer>
-                <MaxImage alt="about dark" src={aboutDarkSrc} />
-            </AboutLeftContainer>
+            <AboutImgContainer>
+                <MaxImage
+                    alt="about dark"
+                    src={showMobileImages ? aboutDarkMobile : aboutDarkSrc}
+                />
+            </AboutImgContainer>
             <AboutMidContainer style={{ padding: isMobile ? '25px' : '50px' }}>
                 <Header variant="h6">ABOUT OUR FURNITURE</Header>
                 <ResponsiveBody1 isMobile={isMobile} theme={theme}>
@@ -25,16 +36,18 @@ export const AboutContainer: FC<AboutContainerProps> = ({ isMobile }) => {
     or anything in between. Product specialists are available to help you create your dream space. `}
                 </ResponsiveBody1>
             </AboutMidContainer>
-            <AboutRightContainer>
-                <MaxImage alt="about light" src={aboutLightSrc} />
-            </AboutRightContainer>
+            <AboutImgContainer>
+                <MaxImage
+                    alt="about light"
+                    src={showMobileImages ? aboutLightMobile : aboutLightSrc}
+                />
+            </AboutImgContainer>
         </>
     );
 };
 
-const AboutLeftContainer = styled.div`
+const AboutImgContainer = styled.div`
     flex: 1;
-    min-width: 420px;
 `;
 
 const Header = styled(Typography)`
@@ -48,11 +61,6 @@ const AboutMidContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-`;
-
-const AboutRightContainer = styled.div`
-    flex: 1;
-    min-width: 440px;
 `;
 
 const MaxImage = styled.img`

@@ -42,15 +42,15 @@ export const NavButtonContainer: FC<NavButtonContainerProps> = ({
 };
 
 const ButtonWrapper = styled.div`
-    min-height: 80px;
+    min-height: 76px;
     align-self: flex-start;
 `;
 
 const StyledButton = styled(Button)`
     height: 100%;
-    min-height: 80px;
+    min-height: 76px;
     border-radius: 0px !important;
-    width: 80px;
+    width: 76px;
     &:hover {
         background-color: hsl(0, 0%, 63%) !important;
     }

@@ -16,7 +16,7 @@ const App = () => {
     const isLgDesktop = useLargeDesktopQuery();
     const aboutColumnQuery = useMediaQuery('(max-width:1250px)');
     const isMediumScreen = !isMobile && !isLgDesktop;
-
+    const isAboutColumn = isMobile || aboutColumnQuery;
 
     return (
         <div className="App">
@@ -45,10 +45,13 @@ const App = () => {
                 </MainRow>
                 <AboutRow
                     style={{
-                        flexDirection: isMobile || aboutColumnQuery ? 'column' : 'row',
+                        flexDirection: isAboutColumn ? 'column' : 'row',
                     }}
                 >
-                    <AboutContainer isMobile={isMobile} />
+                    <AboutContainer
+                        isMobile={isMobile}
+                        isColumn={isAboutColumn}
+                    />
                 </AboutRow>
             </ColumnGrid>
         </div>
